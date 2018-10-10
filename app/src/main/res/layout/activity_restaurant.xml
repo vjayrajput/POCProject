@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="app.akeed.ui.restaurant.RestaurantViewModel" />
+
     </data>
 
     <LinearLayout
@@ -97,6 +98,8 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:currentPage="@={viewModel.currentPage}"
+            android:onPageSelected="@{currentPage -> viewModel.pageSelected(currentPage)}"
             app:adapter="@{viewModel.pagerAdapter}" />
     </LinearLayout>
 </layout>
