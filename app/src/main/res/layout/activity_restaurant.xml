@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="app.akeed.ui.restaurant.RestaurantViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.restaurant.RestaurantActivity">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp32"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/viewFav"
+                android:gravity="center_vertical"
+                android:weightSum="3">
+
+                <Button
+                    android:id="@+id/btnPopular"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.tabSelected == 0 ?  @drawable/round_black_left_bg : @drawable/round_white_left_bg}"
+                    android:fontFamily="@font/avenir_ltstd_black"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.popularTabSelected(viewPager)}"
+                    android:text="@string/tab_popular"
+                    android:textColor="@{viewModel.tabSelected == 0 ?  @color/white : @color/black}"
+                    android:textSize="@dimen/sp12" />
+
+                <Button
+                    android:id="@+id/btnNew"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.tabSelected == 1 ?  @drawable/black_left_right_edge_bg : @drawable/white_left_right_edge_bg}"
+                    android:fontFamily="@font/avenir_ltstd_black"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.newTabSelected(viewPager)}"
+                    android:text="@string/tab_new"
+                    android:textColor="@{viewModel.tabSelected == 1 ?  @color/white : @color/black}"
+                    android:textSize="@dimen/sp12" />
+
+                <Button
+                    android:id="@+id/btnFastest"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp30"
+                    android:layout_weight="1"
+                    android:background="@{viewModel.tabSelected == 2 ?  @drawable/black_right_edge_bg : @drawable/white_right_edge_bg}"
+                    android:fontFamily="@font/avenir_ltstd_black"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.fastestTabSelected(viewPager)}"
+                    android:text="@string/tab_fastest"
+                    android:textColor="@{viewModel.tabSelected == 2 ?  @color/white : @color/black}"
+                    android:textSize="@dimen/sp12" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/viewFav"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@{viewModel.tabSelected == 3 ?  @drawable/round_black_right_bg : @drawable/round_white_right_bg}"
+                android:onClick="@{() -> viewModel.favouriteTabSelected(viewPager)}"
+                android:paddingEnd="@dimen/dp8">
+
+                <ImageView
+                    android:id="@+id/img_favourite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/cd_fav_icon"
+                    android:padding="@dimen/dp4"
+                    app:srcCompat="@drawable/ic_favorite" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adapter="@{viewModel.pagerAdapter}" />
+    </LinearLayout>
+</layout>
