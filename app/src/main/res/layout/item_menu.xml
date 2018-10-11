@@ -1,111 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/dp16"
-    android:paddingRight="@dimen/dp16">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/img_type"
-        android:layout_width="wrap_content"
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="item"
+            type="app.akeed.model.Item" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp12"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/red_circle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
 
-    <TextView
-        android:id="@+id/txt_name"
-        android:layout_width="@dimen/dp0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp8"
-        android:layout_marginTop="@dimen/dp8"
-        android:layout_marginEnd="@dimen/dp8"
-        android:fontFamily="@font/avenir_ltstd_book"
-        android:text="@string/dummy_text"
-        android:textColor="@color/scootsy_black"
-        android:textSize="@dimen/sp12"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add"
-        app:layout_constraintStart_toEndOf="@+id/img_type"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/img_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp12"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/red_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_description"
-        android:layout_width="@dimen/dp0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp8"
-        android:layout_marginTop="@dimen/dp8"
-        android:layout_marginEnd="@dimen/dp8"
-        android:fontFamily="@font/avenir_ltstd_book"
-        android:text="@string/dummy_text"
-        android:textColor="@color/scootsy_black"
-        android:textSize="@dimen/sp10"
-        app:layout_constraintBottom_toTopOf="@+id/txt_price"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add"
-        app:layout_constraintStart_toEndOf="@+id/img_type"
-        app:layout_constraintTop_toBottomOf="@+id/txt_name" />
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="@dimen/dp0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8"
+            android:fontFamily="@font/avenir_ltstd_book"
+            android:text="@{item.name}"
+            android:textColor="@color/scootsy_black"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintStart_toEndOf="@+id/img_type"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name" />
 
-    <TextView
-        android:id="@+id/txt_price"
-        android:layout_width="@dimen/dp0"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp8"
-        android:layout_marginTop="@dimen/dp8"
-        android:layout_marginEnd="@dimen/dp8"
-        android:fontFamily="@font/avenir_ltstd_book"
-        android:text="Rs. 34567"
-        android:textColor="@color/scootsy_black"
-        android:textSize="@dimen/sp12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_type"
-        app:layout_constraintTop_toBottomOf="@+id/txt_description" />
+        <TextView
+            android:id="@+id/txt_description"
+            android:layout_width="@dimen/dp0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8"
+            android:fontFamily="@font/avenir_ltstd_book"
+            android:textColor="@color/scootsy_black"
+            android:textSize="@dimen/sp10"
+            android:visibility="@{TextUtils.isEmpty(item.description) ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/txt_price"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintStart_toEndOf="@+id/img_type"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name"
+            tools:text="Description" />
+
+        <TextView
+            android:id="@+id/txt_price"
+            android:layout_width="@dimen/dp0"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginTop="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8"
+            android:fontFamily="@font/avenir_ltstd_book"
+            android:text="@{@string/item_price(item.price)}"
+            android:textColor="@color/scootsy_black"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_type"
+            app:layout_constraintTop_toBottomOf="@+id/txt_description"
+            tools:text="Rs. 290" />
 
 
-    <TextView
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp4"
-        android:background="@drawable/button_add_bg"
-        android:fontFamily="@font/avenir_ltstd_black"
-        android:gravity="center"
-        android:paddingStart="@dimen/dp8"
-        android:paddingTop="@dimen/dp4"
-        android:paddingEnd="@dimen/dp8"
-        android:paddingBottom="@dimen/dp4"
-        android:text="@string/add"
-        android:textColor="@color/scootsy_black"
-        android:textSize="@dimen/sp10"
-        app:layout_constraintBottom_toTopOf="@+id/view_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp4"
+            android:background="@drawable/button_add_bg"
+            android:fontFamily="@font/avenir_ltstd_black"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp8"
+            android:paddingTop="@dimen/dp4"
+            android:paddingEnd="@dimen/dp8"
+            android:paddingBottom="@dimen/dp4"
+            android:text="@string/add"
+            android:textColor="@color/scootsy_black"
+            android:textSize="@dimen/sp10"
+            app:layout_constraintBottom_toTopOf="@+id/view_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_quantity"
-        android:layout_width="@dimen/dp20"
-        android:layout_height="@dimen/dp20"
-        android:background="@drawable/white_circle"
-        android:fontFamily="@font/avenir_ltstd_black"
-        android:gravity="center"
-        android:padding="@dimen/dp4"
-        android:text="20"
-        android:textColor="@color/scootsy_black"
-        android:textSize="@dimen/sp10"
-        app:layout_constraintBottom_toTopOf="@+id/view_divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
+        <TextView
+            android:id="@+id/txt_quantity"
+            android:layout_width="@dimen/dp20"
+            android:layout_height="@dimen/dp20"
+            android:background="@drawable/white_circle"
+            android:fontFamily="@font/avenir_ltstd_black"
+            android:gravity="center"
+            android:padding="@dimen/dp4"
+            android:text="@{String.valueOf(item.quantity)}"
+            android:textColor="@color/scootsy_black"
+            android:textSize="@dimen/sp10"
+            android:visibility="@{item.quantity == 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/view_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.36"
+            tools:text="20" />
 
-    <View
-        android:id="@+id/view_divider"
-        android:layout_width="@dimen/dp0"
-        android:layout_height="@dimen/dp1"
-        android:layout_marginTop="@dimen/dp8"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_price" />
+        <View
+            android:id="@+id/view_divider"
+            android:layout_width="@dimen/dp0"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginTop="@dimen/dp8"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_price" />
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

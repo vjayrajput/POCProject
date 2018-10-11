@@ -1,174 +1,275 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/htab_maincontent"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp">
+    <data>
 
+        <import type="java.lang.String" />
 
-        <ImageView
-            android:id="@+id/htab_header"
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@drawable/header"
-            android:contentDescription="@string/app_name"
-            android:fitsSystemWindows="true"
-            android:scaleType="centerCrop" />
+        <variable
+            name="restaurant"
+            type="app.akeed.model.Restaurant" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="#80000000" />
+        <variable
+            name="viewModel"
+            type="app.akeed.ui.detail.RestaurantDetailViewModel" />
+    </data>
 
-        <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="@dimen/dp8"
-            android:layout_marginTop="@dimen/dp8"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/dp8"
-            android:src="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/txt_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp8"
-            android:layout_toStartOf="@+id/img_search"
-            android:layout_toEndOf="@+id/img_back"
-            android:fontFamily="font/avenir_ltstd_black"
-            android:gravity="center"
-            android:padding="@dimen/dp8"
-            android:textColor="@color/white" />
-
-        <ImageView
-            android:id="@+id/img_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/dp8"
-            android:layout_marginEnd="@dimen/dp8"
-            android:contentDescription="@string/app_name"
-            android:padding="@dimen/dp8"
-            android:src="@drawable/ic_search" />
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="@dimen/dp8"
-            android:layout_marginBottom="@dimen/dp8">
-
-            <ImageView
-                android:id="@+id/img_open_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_work" />
-
-            <TextView
-                android:id="@+id/txt_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp4"
-                android:layout_toEndOf="@+id/img_open_status"
-                android:fontFamily="@font/avenir_ltstd_book"
-                android:text="OPEN"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp12" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp30"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp16"
-            android:layout_marginBottom="@dimen/dp8"
-            android:background="@drawable/black_round_bg"
-            android:paddingStart="@dimen/dp8"
-            android:paddingTop="@dimen/dp4"
-            android:paddingEnd="@dimen/dp8"
-            android:paddingBottom="@dimen/dp4">
-
-            <ImageView
-                android:id="@+id/img_fav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/dp2"
-                android:src="@drawable/ic_favorite"
-                android:tint="@color/white" />
-
-            <TextView
-                android:id="@+id/txt_fav_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp2"
-                android:layout_toEndOf="@+id/img_fav"
-                android:text="23"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp10" />
-
-            <View
-                android:id="@+id/view_spe_2"
-                android:layout_width="@dimen/dp2"
-                android:layout_height="@dimen/dp24"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp4"
-                android:layout_marginEnd="@dimen/dp4"
-                android:layout_toEndOf="@+id/txt_fav_count"
-                android:background="@color/white" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/view_spe_2"
-                android:contentDescription="@string/app_name"
-                android:padding="@dimen/dp2"
-                android:src="@drawable/ic_room_service" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/htab_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp40"
-        android:layout_gravity="bottom"
-        app:tabBackground="@color/scootsy_tab_background"
-        app:tabIndicatorColor="@color/tab_select_text"
-        app:tabIndicatorHeight="@dimen/dp1"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/tab_select_text"
-        app:tabTextColor="@color/color_address" />
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/htab_viewpager"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/htab_maincontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/header_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp160"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
 
 
+            <ImageView
+                android:id="@+id/htab_header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp160"
+                android:background="@drawable/header"
+                android:contentDescription="@string/app_name"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{restaurant.imageUrl}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp160"
+                android:background="#80000000" />
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp8"
+                android:contentDescription="@string/app_name"
+                android:onClick="@{() -> viewModel.onBackClick()}"
+                android:padding="@dimen/dp8"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_toStartOf="@+id/img_search"
+                android:layout_toEndOf="@+id/img_back"
+                android:fontFamily="font/avenir_ltstd_black"
+                android:gravity="center"
+                android:padding="@dimen/dp8"
+                android:text="@{restaurant.name}"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginEnd="@dimen/dp8"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/dp8"
+                android:src="@drawable/ic_search" />
 
 
-</LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rr1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginBottom="@dimen/dp8">
+
+                <ImageView
+                    android:id="@+id/img_open_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_work" />
+
+                <TextView
+                    android:id="@+id/txt_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp4"
+                    android:layout_toEndOf="@+id/img_open_status"
+                    android:fontFamily="@font/avenir_ltstd_book"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp12"
+                    app:status="@{restaurant.openStatus}" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rr2"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp16"
+                android:layout_marginBottom="@dimen/dp8"
+                android:background="@drawable/black_round_bg"
+                android:paddingStart="@dimen/dp8"
+                android:paddingTop="@dimen/dp4"
+                android:paddingEnd="@dimen/dp8"
+                android:paddingBottom="@dimen/dp4">
+
+                <ImageView
+                    android:id="@+id/img_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/dp2"
+                    android:src="@drawable/ic_favorite"
+                    android:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/txt_fav_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp2"
+                    android:layout_toEndOf="@+id/img_fav"
+                    android:text="@{String.valueOf(restaurant.favouriteCount)}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp10" />
+
+                <View
+                    android:id="@+id/view_spe_2"
+                    android:layout_width="@dimen/dp2"
+                    android:layout_height="@dimen/dp24"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp4"
+                    android:layout_marginEnd="@dimen/dp4"
+                    android:layout_toEndOf="@+id/txt_fav_count"
+                    android:background="@color/white" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/view_spe_2"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/dp2"
+                    android:src="@drawable/ic_room_service" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/htab_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40"
+            android:layout_below="@+id/header_view"
+            android:layout_gravity="bottom"
+            app:setUpWithViewpager="@{ viewPager }"
+            app:tabBackground="@color/scootsy_tab_background"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/tab_select_text"
+            app:tabIndicatorHeight="@dimen/dp1"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/tab_select_text"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/color_address" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/htab_tabs"
+            app:adapter="@{viewModel.pagerAdapter}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        <RelativeLayout
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp4"
+            android:background="@drawable/white_button_bg"
+            android:padding="@dimen/dp6"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="@dimen/dp40"
+                android:layout_height="@dimen/dp40"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_work"
+                android:tint="@android:color/holo_green_dark" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="@dimen/dp1"
+                android:layout_height="@dimen/dp40"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_marginEnd="@dimen/dp8"
+                android:layout_toEndOf="@+id/img_icon"
+                android:background="@android:color/holo_green_dark" />
+
+            <TextView
+                android:id="@+id/txtTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/txt_label"
+                android:layout_toStartOf="@+id/txt_view_cart"
+                android:layout_toEndOf="@+id/view1"
+                android:fontFamily="@font/avenir_ltstd_black"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp18"
+                tools:text="Rs. 0" />
+
+            <TextView
+                android:id="@+id/txt_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/txt_view_cart"
+                android:layout_toEndOf="@+id/view1"
+                android:fontFamily="@font/avenir_ltstd_book"
+                android:text="@string/including_taxes_charges"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp8" />
+
+            <TextView
+                android:id="@+id/txt_view_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp4"
+                android:background="@drawable/green_button_bg"
+                android:gravity="center"
+                android:paddingStart="@dimen/dp10"
+                android:paddingTop="@dimen/dp6"
+                android:paddingEnd="@dimen/dp10"
+                android:paddingBottom="@dimen/dp6"
+                android:text="@string/view_cart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp14" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

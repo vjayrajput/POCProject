@@ -13,4 +13,6 @@
     <string name="shop_status_close">Close</string>
     <string name="shop_status_open">Open</string>
     <string name="shop_status_preorder">Pre-Order</string>
+    <string name="including_taxes_charges">Including Taxes + Charges</string>
+    <string name="view_cart">View Cart</string>
 </resources>

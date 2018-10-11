@@ -1,5 +1,7 @@
 package app.akeed.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,10 +9,21 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class Restaurant implements Parcelable {
+import app.akeed.BR;
 
+public class Restaurant extends BaseObservable implements Parcelable {
 
+    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
+        @Override
+        public Restaurant createFromParcel(Parcel source) {
+            return new Restaurant(source);
+        }
 
+        @Override
+        public Restaurant[] newArray(int size) {
+            return new Restaurant[size];
+        }
+    };
     @SerializedName("id")
     private String id;
     @SerializedName("favourite_count")
@@ -32,8 +45,24 @@ public class Restaurant implements Parcelable {
     @SerializedName("categorys")
     private ArrayList<Category> categorys = null;
 
+    public Restaurant() {
+    }
+
+    protected Restaurant(Parcel in) {
+        this.id = in.readString();
+        this.favouriteCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.isFavourite = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.address = in.readString();
+        this.openStatus = in.readString();
+        this.imageUrl = in.readString();
+        this.offers = in.createStringArrayList();
+        this.foodTypes = in.createStringArrayList();
+        this.categorys = in.createTypedArrayList(Category.CREATOR);
+    }
 
 
+    @Bindable
     public String getId() {
         return id;
     }
@@ -42,22 +71,27 @@ public class Restaurant implements Parcelable {
         this.id = id;
     }
 
+    @Bindable
     public Integer getFavouriteCount() {
         return favouriteCount;
     }
 
     public void setFavouriteCount(Integer favouriteCount) {
         this.favouriteCount = favouriteCount;
+
     }
 
+    @Bindable
     public Integer getIsFavourite() {
         return isFavourite;
     }
 
     public void setIsFavourite(Integer isFavourite) {
         this.isFavourite = isFavourite;
+        notifyPropertyChanged(BR.isFavourite);
     }
 
+    @Bindable
     public String getName() {
         return name;
     }
@@ -66,6 +100,7 @@ public class Restaurant implements Parcelable {
         this.name = name;
     }
 
+    @Bindable
     public String getAddress() {
         return address;
     }
@@ -74,6 +109,7 @@ public class Restaurant implements Parcelable {
         this.address = address;
     }
 
+    @Bindable
     public String getOpenStatus() {
         return openStatus;
     }
@@ -82,6 +118,7 @@ public class Restaurant implements Parcelable {
         this.openStatus = openStatus;
     }
 
+    @Bindable
     public String getImageUrl() {
         return imageUrl;
     }
@@ -90,6 +127,7 @@ public class Restaurant implements Parcelable {
         this.imageUrl = imageUrl;
     }
 
+    @Bindable
     public ArrayList<String> getOffers() {
         return offers;
     }
@@ -98,6 +136,7 @@ public class Restaurant implements Parcelable {
         this.offers = offers;
     }
 
+    @Bindable
     public ArrayList<String> getFoodTypes() {
         return foodTypes;
     }
@@ -106,6 +145,7 @@ public class Restaurant implements Parcelable {
         this.foodTypes = foodTypes;
     }
 
+    @Bindable
     public ArrayList<Category> getCategorys() {
         return categorys;
     }
@@ -113,7 +153,6 @@ public class Restaurant implements Parcelable {
     public void setCategorys(ArrayList<Category> categorys) {
         this.categorys = categorys;
     }
-
 
     @Override
     public int describeContents() {
@@ -134,34 +173,6 @@ public class Restaurant implements Parcelable {
         dest.writeTypedList(this.categorys);
     }
 
-    public Restaurant() {
-    }
-
-    protected Restaurant(Parcel in) {
-        this.id = in.readString();
-        this.favouriteCount = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.isFavourite = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.name = in.readString();
-        this.address = in.readString();
-        this.openStatus = in.readString();
-        this.imageUrl = in.readString();
-        this.offers = in.createStringArrayList();
-        this.foodTypes = in.createStringArrayList();
-        this.categorys = in.createTypedArrayList(Category.CREATOR);
-    }
-
-    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
-        @Override
-        public Restaurant createFromParcel(Parcel source) {
-            return new Restaurant(source);
-        }
-
-        @Override
-        public Restaurant[] newArray(int size) {
-            return new Restaurant[size];
-        }
-    };
-
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -176,4 +187,5 @@ public class Restaurant implements Parcelable {
                 ", foodTypes=" + foodTypes +
                 '}';
     }
+
 }

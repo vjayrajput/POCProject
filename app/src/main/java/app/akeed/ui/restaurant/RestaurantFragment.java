@@ -1,13 +1,13 @@
 package app.akeed.ui.restaurant;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +21,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import app.akeed.R;
+import app.akeed.databinding.FragmentRestaurantBinding;
 import app.akeed.model.Restaurant;
 import app.akeed.model.RestaurantList;
 import app.akeed.ui.detail.RestaurantDetailActivity;
 import app.akeed.ui.listener.OnRestaurantItemClickListener;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import app.akeed.utils.Constants;
 
 public class RestaurantFragment extends Fragment {
-    @BindView(R.id.my_recycler_view)
-    RecyclerView recyclerView;
+    FragmentRestaurantBinding binding;
     private RestaurantAdapter adapter;
     private ArrayList<Restaurant> data = new ArrayList<>();
-    private RecyclerView.LayoutManager layoutManager;
     private int type;
-    private Unbinder unbinder;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -45,32 +41,40 @@ public class RestaurantFragment extends Fragment {
     public static RestaurantFragment newInstance(int type) {
         RestaurantFragment restaurantFragment = new RestaurantFragment();
         Bundle args = new Bundle();
-        args.putInt("type", type);
+        args.putInt(Constants.KEY_TYPE, type);
         restaurantFragment.setArguments(args);
         return restaurantFragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Constants.KEY_TYPE, type);
     }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            type = savedInstanceState.getInt(Constants.KEY_TYPE);
+        }
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        type = getArguments().getInt("type", 0);
-        View root = inflater.inflate(R.layout.fragment_restaurant, container, false);
-        unbinder = ButterKnife.bind(this, root);
-        return root;
+        type = getArguments().getInt(Constants.KEY_TYPE, 0);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_restaurant, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerView.setHasFixedSize(true);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         fetchRestaurantData();
     }
 
@@ -105,7 +109,7 @@ public class RestaurantFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        adapter = new RestaurantAdapter(getActivity(), data, new OnRestaurantItemClickListener() {
+        adapter = new RestaurantAdapter(data, new OnRestaurantItemClickListener() {
             @Override
             public void onItemClick(View item, Restaurant restaurant) {
                 Intent intent = new Intent(getActivity(), RestaurantDetailActivity.class);
@@ -113,7 +117,7 @@ public class RestaurantFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
     }
 
     public String loadJSONFromAsset() {
@@ -132,9 +136,4 @@ public class RestaurantFragment extends Fragment {
         return json;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 }

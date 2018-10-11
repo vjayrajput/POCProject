@@ -2,19 +2,16 @@ package app.akeed.ui.restaurant;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import app.akeed.BR;
 import app.akeed.R;
 import app.akeed.ui.common.ViewPagerAdapter;
 
 public class RestaurantViewModel extends BaseObservable {
-    private static final String TAG = RestaurantViewModel.class.getSimpleName();
     FragmentActivity mContext;
     ViewPagerAdapter adapter;
     private int currentPage = 0;
@@ -39,7 +36,6 @@ public class RestaurantViewModel extends BaseObservable {
     }
 
     public void pageSelected(int pos) {
-        Log.e(TAG, "pageSelected ===>" + pos);
         this.tabSelected = pos;
         notifyPropertyChanged(BR.tabSelected);
     }

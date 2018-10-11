@@ -11,4 +11,9 @@
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
 
     </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/avenir_ltstd_roman</item>
+    </style>
 </resources>
