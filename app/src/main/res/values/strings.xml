@@ -1,14 +1,21 @@
 <resources>
     <string name="app_name">Akeed App</string>
+
+
+    <!--empty state-->
+    <string name="empty_screen">We do not have anything\nhere right now.</string>
+    <string name="please_retry">Please Retry</string>
+    <string name="retry">Retry</string>
+
+
+    <!--akeed app-->
     <string name="cd_restaurant_image">Restaurant Image</string>
     <string name="cd_fav_icon">Favourite Icon</string>
     <string name="activity_restaurant">Restaurant</string>
     <string name="tab_fastest">FASTEST</string>
     <string name="tab_new">NEW</string>
     <string name="tab_popular">POPULAR</string>
-    <string name="tab_fevourite">FAVOURITE</string>
     <string name="add">ADD</string>
-    <string name="dummy_text">Hell hhHH HHH jhhh HHHl lhhllhlahsfslhdf alskfsdglk ashgsdlkhg lkasglk aslgslk g</string>
     <string name="item_price">Rs. %d</string>
     <string name="shop_status_close">Close</string>
     <string name="shop_status_open">Open</string>

@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.detail.RestaurantDetailActivity">
 
     <data>
+
+        <import type="android.view.View" />
 
         <import type="java.lang.String" />
 
         <variable
             name="restaurant"
-            type="app.akeed.model.Restaurant" />
+            type="app.boilerplate.ui.restaurant.fragment.RestaurantItemViewModel" />
 
         <variable
             name="viewModel"
-            type="app.akeed.ui.detail.RestaurantDetailViewModel" />
+            type="app.boilerplate.ui.detail.RestaurantDetailActivityViewModel" />
+
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <RelativeLayout
         android:id="@+id/htab_maincontent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +58,6 @@
                 android:layout_marginStart="@dimen/dp8"
                 android:layout_marginTop="@dimen/dp8"
                 android:contentDescription="@string/app_name"
-                android:onClick="@{() -> viewModel.onBackClick()}"
                 android:padding="@dimen/dp8"
                 android:src="@drawable/ic_back" />
 
@@ -109,10 +113,10 @@
                     android:layout_toEndOf="@+id/img_open_status"
                     android:fontFamily="@font/avenir_ltstd_book"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp12"
-                    app:status="@{restaurant.openStatus}" />
+                    android:textSize="@dimen/sp12" />
 
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/rr2"
@@ -195,7 +199,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/htab_tabs"
-            app:adapter="@{viewModel.pagerAdapter}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
